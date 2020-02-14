@@ -10,6 +10,7 @@ const dev = async (ctx: CliContext): Promise<void> => {
   const argv = getSubArgs(ctx.argv, {
     '--console': Boolean,
     '--port': Number,
+    '--inspect': String,
 
     // Aliases
     '-c': '--console',
@@ -18,6 +19,7 @@ const dev = async (ctx: CliContext): Promise<void> => {
 
   const isConsole = argv['--console'] || false;
   const port = argv['--port'] || process.env.PORT || 5000;
+  const inspectionUrl = argv['--inspect'];
 
   const config = getBottenderConfig();
 
@@ -25,7 +27,9 @@ const dev = async (ctx: CliContext): Promise<void> => {
 
   // watch
   nodemon(
-    `--exec "bottender start ${isConsole ? '--console' : ''} --port ${port}"`
+    `${
+      inspectionUrl ? `--inspect=${inspectionUrl} -- ` : ''
+    }--exec "bottender start ${isConsole ? '--console' : ''} --port ${port}"`
   )
     // TODO: improve messages
     .on('start', () => {
