@@ -10,7 +10,9 @@ import LineEvent from './line/LineEvent';
 import MessengerEvent from './messenger/MessengerEvent';
 import SlackEvent from './slack/SlackEvent';
 import TelegramEvent from './telegram/TelegramEvent';
+import TwilioClient from './whatsapp/TwilioClient';
 import ViberEvent from './viber/ViberEvent';
+import WhatsappEvent from './whatsapp/WhatsappEvent';
 import { ConsoleClient } from './console/ConsoleClient';
 import { LineRequestBody } from './line/LineConnector';
 import { MessengerRequestBody } from './messenger/MessengerConnector';
@@ -24,7 +26,8 @@ export type Client =
   | LineClient
   | SlackOAuthClient
   | TelegramClient
-  | ViberClient;
+  | ViberClient
+  | TwilioClient;
 
 export type Event =
   | ConsoleEvent
@@ -32,7 +35,8 @@ export type Event =
   | LineEvent
   | SlackEvent
   | TelegramEvent
-  | ViberEvent;
+  | ViberEvent
+  | WhatsappEvent;
 
 export type Body =
   | ConsoleRawEvent
